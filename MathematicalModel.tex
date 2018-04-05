@@ -51,6 +51,55 @@ There are now many possible choices of criterion. One example is given by
 This criterion can then be rewritten as an explicit function of the projection matrix
 W in the form
 \[J(W) = Tr\{(WS_WW^T)^{-1}(WS_BW^T)\}.\]
+The weight values are determined by those eigenvectors of \(S_W^{-1}S_B\) that corresponds to the largest eigenvalues.
+
+We can employ the inner product matrix for calculation, this inner product matrix is also named Gram Matrix.
+
+\[G_{N,N} = 
+ \begin{pmatrix}
+X_1^TX_1 & X_1^TX_2 & \cdots & X_1^TX_N \\
+X_2^TX_1 & X_2^TX_2 & \cdots & X_2^TX_N \\
+\vdots & \vdots & \ddots & \vdots\\
+X_N^TX_1 & X_N^TX_2 & \cdots & X_N^TX_N
+\end{pmatrix} \]
+
+To extend LDA to non-linear mappings, the data can be mapped to a new feature space via some function \(\phi\).
+\[X_{i,j} \longmapsto \phi(X_{i,j})\]
+
+Now the Gram Matrix becomes
+
+\[G_{N,N} = 
+ \begin{pmatrix}
+\phi(X_1^T)\phi(X_1) & \phi(X_1^T)\phi(X_2) & \cdots & \phi(X_1^T)\phi(X_N) \\
+\phi(X_2)^T\phi(X_1) & \phi(X_2^T)\phi(X_2) & \cdots & \phi(X_2^T)\phi(X_N) \\
+\vdots & \vdots & \ddots & \vdots\\
+\phi(X_N^T)\phi(X_1) & \phi(X_N^T)\phi(X_2) & \cdots & \phi(X_N^T)\phi(X_N)
+\end{pmatrix} \]
+The Trick is not to explicitly use \(\phi\) as it can be computationally expensive.
+We can make use of a kernel function which is dot product of \(\phi\) vectors. 
+The kernel function is defined as 
+\[K(X_{i,j},X_{i,j}) = \phi(X_{i,j})^T\phi(X_{m,n})\]
+Using the Kernel function and getting the matrix without explicitly mapping to the higher dimension is known as the \textbf{Kernel-LDA}.\\
+Using the matrix, we can get the eigen vectors with only significant values.
+These eigen vector is \(\phi(u)\).
+Now,
+\[y=\phi(u)^T M^T \phi(X) \]
+
+We need to get y, but \(M^T \phi(X)\) is nothing but the kernel matrix columns and this eliminates the need of \(\phi\) function explicitly.
+\[M^T \phi(X) = 
+\begin{bmatrix}
+K(X_{11}, X) \\
+K(X_{12}, X) \\
+\vdots \\
+K(X_{NN}, X)
+\end{bmatrix} = Z\]
+
+Now, 
+\[y = \phi(u)^T Z\]
+
+The  y can be calculated using the above result.
+
+Kernel trick simplifies the task to be done as the need for searching for \(\phi\) function is eliminated.
 \end{document}
 
 
