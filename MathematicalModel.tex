@@ -16,8 +16,8 @@ One way to measure the separation of classes is find the separation of the proje
 \[m_2 - m_1 = W^T(\bf{m_2 -m_1})\]
 where, 
 \[m_k = W^T\bf{m_k}\]
-is the mean of the projected data from class \emph{\(C_k\)}. However, this expression can be made large by increasing the magnitude of W. To solve this problem, we could constrain W to to have unit length, so that \(\sum_{i} w_i^2 = 1\). \\
-Using a Lagrange multiplier to perform the constrained maximization, we then find that \( w \propto \bf{m_2 - m_1 }\).\\
+is the mean of the projected data from class \emph{\(C_k\)}. However, this expression can be made large by increasing the magnitude of W.\\ To solve this problem, we could constrain W to to have unit length, so that \(\sum_{i} w_i^2 = 1\). \\
+Using a Lagrange multiplier to perform the constrained maximization, we then find that \( W \propto (\bf{m_2 - m_1 })\).\\
 The within-class variance of the transformed data from class \emph{\(C_k\)} is therefore given by 
 \[s_k^2 = \sum_{n \in \emph{\(C_k\)}} (y_n - m_k)^2\]
 where \(y_n = W^TX_n\). We can define the total within-class variance for the whole data set to be simply \(s_1^2 + s_2^2\). 
@@ -26,7 +26,31 @@ The Fisher criterion is defined to be the ratio of the between-class variance to
 \[\emph{J}(W) = \frac{(m_1 - m_2)^2}{s_1^2 + s_2^2}.\]
 Now, rewriting equation gives us an explicit dependence on w
 \[\emph{J}(W) = \frac{W^TS_BW}{W^TS_WW}.\]
+where \(S_B\) is the \textit{between-class} covariance matrix and is given by
+\[S_B =(\bf{m_2 -m_1})(\bf{m_2 -m_1})^T\]
+and \(S_W\) is the total \textit{within-class} covariance matrix, given by
+\[S_W = \sum_{n \in \emph{\(C_1\)}}(\bf{X_n - m_1})(\bf{X_n - m_1})^T + \sum_{n \in \emph{\(C_2\)}}(\bf{X_n - m_2})(\bf{X_n - m_2})^T \]
+Differentiating J(W) with respect to w, we find that J(w) is maximized when
+\[(W^TS_BW)S_WW = (W^TS_WW)S_BW\]
+From the above equation, we see that \(S_BW\) is always in the direction of \((\bf{m_2 - m_1} )\). Furthermore,
+we do not care about the magnitude of w, only its direction, and so we can drop the scalar factors \((w^TS_BW)\) and \((W^TS_WW)\).\\
+Multiplying both sides of (4.29) by \(S_W^{-1}\) we then obtain
+\[W \propto S_W^{-1}(\bf{m_2 - m_1}) \]
+The result is known as Fisher’s linear discriminant, although strictly it
+is not a discriminant but rather a specific choice of direction for projection of the
+data down to one dimension.\\
 
+Now for K\(>\)2 classes, we can define covariance matrices in the projected \textbf{y}-space
+\[s_B = \sum_{k=1}^{K}N_k( \mu_k - \mu)(\mu_k - \mu)^T\]
+and
+\[s_W = \sum_{k=1}^{K}\sum_{n \in \emph{\(C_k\)}}( y_n - \mu_k)(y_n - 	\mu_k)^T \]
+where
+\[ \mu_k = \frac{1}{N_k} \sum_{n \in C_k}y_\n, \qquad \qquad \frac{1}{N}\sum_{k=1}^{K}N_k\mu_k \]
+There are now many possible choices of criterion. One example is given by
+\[J(W) = Tr\{s_W^{-1}s_B\}.\]
+This criterion can then be rewritten as an explicit function of the projection matrix
+W in the form
+\[J(W) = Tr\{(WS_WW^T)^{-1}(WS_BW^T)\}.\]
 \end{document}
 
 
