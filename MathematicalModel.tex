@@ -1,7 +1,31 @@
 
-\documentclass{article}
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
 \begin{document}
-\[x^2 + y^2 = z^2\]
+For the dimensionality reduction, we first consider the case of two classes, and then we can consider the generalization of the Linear discriminant for more than two classes.\\
+Suppose we take the D-dimensional input vector \(X\) and project it down to one dimension using 
+
+\[y = W^TX\] If we classify \(y > -w_0\) as \emph{\(C_1\)}, and otherwise as class \emph{\(C_2\)}, then we obtain the standard linear classifier. 
+We can, by adjusting the components of the weight vector W, select a projection that maximizes the class separation.\\
+Consider that, there are \emph{\(N_1\)} examples of class \emph{\(C_1\)} and \emph{\(N_2\)} examples of class \emph{\(C_2\)}, so the mean vectors of the two classes are given by
+\[ \bf{m_1} = \frac{1}{N_1} \sum_{n\in\emph{\(C_1\)}}X_n, \qquad\qquad \bf{m_1} = \frac{1}{N_2} \sum_{n\in\emph{\(C_2\)} }X_n \]
+
+One way to measure the separation of classes is find the separation of the projected class means, when projected onto W. This implies we choose W so as to maximize 
+\[m_2 - m_1 = W^T(\bf{m_2 -m_1})\]
+where, 
+\[m_k = W^T\bf{m_k}\]
+is the mean of the projected data from class \emph{\(C_k\)}. However, this expression can be made large by increasing the magnitude of W. To solve this problem, we could constrain W to to have unit length, so that \(\sum_{i} w_i^2 = 1\). \\
+Using a Lagrange multiplier to perform the constrained maximization, we then find that \( w \propto \bf{m_2 - m_1 }\).\\
+The within-class variance of the transformed data from class \emph{\(C_k\)} is therefore given by 
+\[s_k^2 = \sum_{n \in \emph{\(C_k\)}} (y_n - m_k)^2\]
+where \(y_n = W^TX_n\). We can define the total within-class variance for the whole data set to be simply \(s_1^2 + s_2^2\). 
+The Fisher criterion is defined to be the ratio of the between-class variance to the within-class variance and is given by 
+
+\[\emph{J}(W) = \frac{(m_1 - m_2)^2}{s_1^2 + s_2^2}.\]
+Now, rewriting equation gives us an explicit dependence on w
+\[\emph{J}(W) = \frac{W^TS_BW}{W^TS_WW}.\]
 
 \end{document}
 
