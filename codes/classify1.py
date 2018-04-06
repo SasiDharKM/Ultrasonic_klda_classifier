@@ -27,10 +27,9 @@ def main():
         clf = LogisticRegression(solver='saga', max_iter=10000, verbose=1)
     clf.fit(X_train, y_train)
     score = clf.score(X_test, y_test)
-    print "The score is ", score
+    print "The score for the classification is ", score
     run_time = time.time() - t0
     print "The run time is ", run_time
 
 if __name__ == '__main__':
-    print __doc__
     main()
