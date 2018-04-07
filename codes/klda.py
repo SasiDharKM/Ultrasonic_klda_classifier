@@ -10,7 +10,7 @@ def plot_eigs(ev, inds):
     """
     num_vals = len(ev)
     plt.scatter([i+1 for i in range(num_vals)], ev[inds], color='b')
-    plt.savefig('../res_imgs/eig_B_gauss.png')
+    plt.savefig('../res_imgs/eig_A_polynomial.png')
     plt.show()
 
 def klda(X, y):
@@ -32,7 +32,7 @@ def klda(X, y):
         class_indices.append(np.where(y==c))
 
     # Calculate the Gram matrix after the Kernel Trick
-    G = mlpy.kernel_gaussian(X, X, sigma=15)
+    G = mlpy.kernel_polynomial(X, X)
     # print G.shape
 
     # Separate the k classes into k different matrices
@@ -80,7 +80,7 @@ def klda(X, y):
 
     # Reduce the data
     # Choose the dimension to reduce to after analyzing the plot of eigen values
-    to_red = 7
+    to_red = 1
     indices = indices[:to_red]
     eig_vecs = eig_vecs[indices]
     W = np.reshape(eig_vecs[0], (N, 1))
@@ -93,7 +93,7 @@ def main():
     """
     The main method
     """
-    data = np.loadtxt('../Flowmeters/Meter B')
+    data = np.loadtxt('../Flowmeters/Meter A')
     print data.shape
     N, m = data.shape
     m -= 1
@@ -103,9 +103,9 @@ def main():
     k = len(classes)
     print X.shape, y.shape
     print classes
-    redX = klda(X, y)
+    redX = klda(X, y).astype(np.float32)
     redData = np.concatenate((redX.T, np.reshape(y, (N, 1))), axis=1)
-    np.savetxt('../reduced_data/B_7_gauss', redData)
+    np.savetxt('../reduced_data/A_1_poly', redData)
 
 if __name__ == '__main__':
     main()

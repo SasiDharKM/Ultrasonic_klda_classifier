@@ -5,8 +5,8 @@ from sklearn.linear_model import LogisticRegression
 
 def main():
     t0 = time.time()
-    is_A = False
-    data = np.loadtxt('../Flowmeters/Meter B')
+    is_A = True
+    data = np.loadtxt('../reduced_data/A_1_poly')
     print data.shape
     N, m = data.shape
     m -= 1
