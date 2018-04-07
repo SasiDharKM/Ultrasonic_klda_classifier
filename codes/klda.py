@@ -1,3 +1,13 @@
+"""
+Function to implement KLDA on a given dataset
+
+Steps
+1. Load the dataset
+2. Calculate the Gram Matrix for the given dataset
+3. Calculate the sw_inverse and sb for G
+4. Obtain n largest eigen values, and corresponding eigen vectors
+5. Transform the input data
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 import mlpy
@@ -10,7 +20,7 @@ def plot_eigs(ev, inds):
     """
     num_vals = len(ev)
     plt.scatter([i+1 for i in range(num_vals)], ev[inds], color='b')
-    plt.savefig('../res_imgs/eig_A_polynomial.png')
+    plt.savefig('../res_imgs/eig_A_gauss_sig2_ani.png')
     plt.show()
 
 def klda(X, y):
@@ -32,7 +42,7 @@ def klda(X, y):
         class_indices.append(np.where(y==c))
 
     # Calculate the Gram matrix after the Kernel Trick
-    G = mlpy.kernel_polynomial(X, X)
+    G = mlpy.kernel_gaussian(X, X, sigma=2.0)
     # print G.shape
 
     # Separate the k classes into k different matrices
@@ -105,7 +115,7 @@ def main():
     print classes
     redX = klda(X, y).astype(np.float32)
     redData = np.concatenate((redX.T, np.reshape(y, (N, 1))), axis=1)
-    np.savetxt('../reduced_data/A_1_poly', redData)
+    np.savetxt('../reduced_data/A_1_gauss', redData)
 
 if __name__ == '__main__':
     main()
