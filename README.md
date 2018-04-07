@@ -104,3 +104,12 @@ Columns | Attribute
  28-35 | Gain at both ends of each of the four paths 
  36-43 | Transit time at both ends of each of the four paths 
  44 | Class attribute (1,2,3,4)
+
+### Running the codes
+To run the codes, please install the requisite packages from the requirements.txt provided. \
+This can be done as follows \
+```bash
+pip install -r requirements.txt
+```
+Please make sure you have python and python-pip installed in your system first though
+
