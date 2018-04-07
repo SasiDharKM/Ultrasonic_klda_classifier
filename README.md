@@ -107,7 +107,7 @@ Columns | Attribute
 
 ### Running the codes
 To run the codes, please install the requisite packages from the requirements.txt provided. \
-This can be done as follows \
+This can be done as follows
 ```bash
 pip install -r requirements.txt
 ```
