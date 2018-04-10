@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 def main():
     t0 = time.time()
     is_A = True
-    data = np.loadtxt('../reduced_data/A_1_poly')
+    data = np.loadtxt('../reduced_data/adi_36d_A')
     print data.shape
     N, m = data.shape
     m -= 1

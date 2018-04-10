@@ -5,7 +5,7 @@ plt.style.use('ggplot')
 
 def main():
     # Load the data
-    data = np.loadtxt('../reduced_data/A_2_line')
+    data = np.loadtxt('../reduced_data/adi_2d_A')
     X, y = data[:, :2], data[:, 2]
     colors = ['r', 'b']
     classes, Ns = np.unique(y, return_counts=True)

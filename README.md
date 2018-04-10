@@ -113,3 +113,20 @@ pip install -r requirements.txt
 ```
 Please make sure you have python and python-pip installed in your system first though
 
+## R installation instructions
+Instructions are given as tested on Ubuntu 16.04
+#### First install R on your system
+```bash
+sudo apt-get install r-base
+```
+#### Open R as follows, using sudo privileges for installing required packages
+```bash
+sudo R
+```
+#### Install the following
+```R
+install.packages("caret")
+install.packages("lfda")
+install.packages("kernlab")
+```
+
