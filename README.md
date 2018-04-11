@@ -5,7 +5,7 @@ The operations are performed on a dataset named "Ultrasonic flowmeter diagnostic
 
 The Dataset can be found [here](https://archive.ics.uci.edu/ml/datasets/Ultrasonic+flowmeter+diagnostics).
 
-Some details regarding the dataset:
+## Dataset Details
 
 Task to be done | Classification
 ----|----
@@ -130,3 +130,20 @@ On Debian based distributions:
     install.packages("lfda")
     install.packages("kernlab")
     ```
+
+## Project Instructions
+1. Run `classify1.py` on all 4 meters and note down the results for each meter.
+2. Run `r_prep.py` for all the 4 meters to obtain data compatible with R code.
+3. Choose a meter and do the following steps
+    a. Run `klda.py` and run classify.py on the resulting saved file obtained.
+    b. Run `klda.R` and run classify.py on the resulting saved file obtained.
+    c. Compare the results for no dimensionality reduction, dimensionality reduction using native Python and dimensionality reduction using R package.
+4. Repeat step 3 for different values of the target dimension
+5. Repeat steps 3 and 4 for different kernel functions (Different Kernel functions can be found in a link given in `klda.R`)
+
+## Results
+### For Logistic Regression without dimensionality reduction
+For flowmeter A, we get a score of 0.6667 after 8310 epochs with a run time of 0.4124 seconds \
+For flowmeter B, we get a score of 1.0000 after 1240 epochs with a run time of 0.1948 seconds \
+For flowmeter C, we get a score of 0.8421 after 4000 epochs with a run time of 1.3044 seconds \
+For flowmeter D, we get a score of 0.7778 after 6000 epochs with a run time of 1.9976 seconds
