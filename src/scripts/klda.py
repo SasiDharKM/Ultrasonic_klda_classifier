@@ -11,19 +11,20 @@ Steps
 import numpy as np
 import matplotlib.pyplot as plt
 import mlpy
+import argparse
 
 plt.style.use('ggplot')
 
-def plot_eigs(ev, inds):
+def plot_eigs(ev, inds, img_f):
     """
     A Function to plot the eigen values in descending order
     """
     num_vals = len(ev)
     plt.scatter([i+1 for i in range(num_vals)], ev[inds], color='b')
-    plt.savefig('../res_imgs/eig_A_gauss_sig2_ani.png')
+    plt.savefig(img_f)
     plt.show()
 
-def klda(X, y):
+def klda(X, y, img_f):
     """
     Function to reduce the data and give the reduced transformation matrix
     X - The original dimensional data
@@ -86,7 +87,7 @@ def klda(X, y):
     sw_inv_sb = np.matmul(np.linalg.pinv(sw), sb)
     eig_vals, eig_vecs = np.linalg.eig(sw_inv_sb)
     indices = np.argsort(eig_vals)[::-1]
-    plot_eigs(eig_vals, indices)
+    plot_eigs(eig_vals, indices, img_f)
 
     # Reduce the data
     # Choose the dimension to reduce to after analyzing the plot of eigen values
@@ -103,7 +104,12 @@ def main():
     """
     The main method
     """
-    data = np.loadtxt('../Flowmeters/Meter A')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--fname", help="file name containing data", default="../Flowmeters/Meter A")
+    parser.add_argument("-s", "--sname", help="file name to save reduced data to", default="../reduced_data/A_1_gauss")
+    parser.add_argument("-i", "--iname", help="file name to save image to", default="../res_imgs/def.png")
+    args = parser.parse_args()
+    data = np.loadtxt(args.fname)
     print data.shape
     N, m = data.shape
     m -= 1
@@ -113,9 +119,9 @@ def main():
     k = len(classes)
     print X.shape, y.shape
     print classes
-    redX = klda(X, y).astype(np.float32)
+    redX = klda(X, y, args.iname).astype(np.float32)
     redData = np.concatenate((redX.T, np.reshape(y, (N, 1))), axis=1)
-    np.savetxt('../reduced_data/A_1_gauss', redData)
+    np.savetxt(args.sname, redData)
 
 if __name__ == '__main__':
     main()

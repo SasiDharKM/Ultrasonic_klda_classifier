@@ -2,11 +2,15 @@ import time
 import numpy as np
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LogisticRegression
+import argparse
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--fname", help="file name containing data to be classified", default="../Flowmeters/Meter A")
+    args = parser.parse_args()
     t0 = time.time()
     is_A = True
-    data = np.loadtxt('../Flowmeters/Meter A')
+    data = np.loadtxt(args.fname)
     print data.shape
     N, m = data.shape
     m -= 1
