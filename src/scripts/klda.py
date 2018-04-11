@@ -91,7 +91,7 @@ def klda(X, y, img_f):
 
     # Reduce the data
     # Choose the dimension to reduce to after analyzing the plot of eigen values
-    to_red = 1
+    to_red = 4
     indices = indices[:to_red]
     eig_vecs = eig_vecs[indices]
     W = np.reshape(eig_vecs[0], (N, 1))

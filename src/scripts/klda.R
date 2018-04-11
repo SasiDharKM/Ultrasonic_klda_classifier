@@ -2,17 +2,17 @@ require(kernlab)
 require(lfda)
 
 
-trainData = read.table("test", sep=" ", header=FALSE)
+trainData = read.table("../Flowmeters/rD", sep=" ", header=FALSE)
 
-trainAttr <- trainData[1:36]
+trainAttr <- trainData[1:43]
 trainAttrMatrix <- as.matrix(trainAttr,mode="numeric")
 
-rbfkernel <- anovadot(sigma = 1, degree = 1)
+rbfkernel <- rbfdot(sigma = 1)
 
 kGramMatrix <-kernelMatrix(rbfkernel, trainAttrMatrix, trainAttrMatrix)
 write.table(kGramMatrix, file = "kGramMatrix.txt", sep = "\t", row.names = FALSE, col.names = FALSE)
-trainLabels <- trainData[37:37]
-r <- 36 
+trainLabels <- trainData[44:44]
+r <- 2
 #result comprises of both transformation matrix and transformed data set with less dimensions
 result_train <- klfda(kGramMatrix, trainLabels, r, metric="plain")
 #result$Z gives transformed dataset matrix and result$T gives the transformation matrix
@@ -23,7 +23,7 @@ write.table(transformationMatrix, file = "transformationMatrix.txt", sep = "\t",
 
 #displaying the transformed dataset 
 finalResTrain = cbind(transformedTrainData, trainLabels)
-write.table(finalResTrain, file = "Anirudh_2d(2).txt", sep = "\t", row.names = FALSE, col.names = FALSE)
+write.table(finalResTrain, file = "../final_data/D_rbf_2R", sep = "\t", row.names = FALSE, col.names = FALSE)
 
 # Check these out for the different kernels
 # https://www.rdocumentation.org/packages/kerndwd/versions/2.0.1/topics/kernel%20functions

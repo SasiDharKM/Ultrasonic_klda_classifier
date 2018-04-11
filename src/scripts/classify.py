@@ -9,7 +9,7 @@ def main():
     parser.add_argument("-f", "--fname", help="file name containing data to be classified", default="../Flowmeters/Meter A")
     args = parser.parse_args()
     t0 = time.time()
-    is_A = True
+    is_A = False
     data = np.loadtxt(args.fname)
     print data.shape
     N, m = data.shape
