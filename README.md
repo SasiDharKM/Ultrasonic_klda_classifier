@@ -132,7 +132,7 @@ On Debian based distributions:
     ```
 
 ## Project Instructions
-1. Run `classify1.py` on all 4 meters and note down the results for each meter.
+1. Run `classify.py` on all 4 meters and note down the results for each meter.
 2. Run `r_prep.py` for all the 4 meters to obtain data compatible with R code.
 3. Choose a meter and do the following steps
     a. Run `klda.py` and run classify.py on the resulting saved file obtained.
