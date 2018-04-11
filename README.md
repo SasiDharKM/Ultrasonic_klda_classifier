@@ -105,28 +105,28 @@ Columns | Attribute
  36-43 | Transit time at both ends of each of the four paths 
  44 | Class attribute (1,2,3,4)
 
-### Running the codes
-To run the codes, please install the requisite packages from the requirements.txt provided. \
-This can be done as follows
+## Setup
+### Python
+Install packages from requirements.txt.
 ```bash
 pip install -r requirements.txt
 ```
-Please make sure you have python and python-pip installed in your system first though
 
-## R installation instructions
-Instructions are given as tested on Ubuntu 16.04
-#### First install R on your system
-```bash
-sudo apt-get install r-base
-```
-#### Open R as follows, using sudo privileges for installing required packages
-```bash
-sudo R
-```
-#### Install the following
-```R
-install.packages("caret")
-install.packages("lfda")
-install.packages("kernlab")
-```
+### R
+1. Install R \
+On Debian based distributions:
+    ```bash
+    $ apt-get install r-base
+    ```
 
+2. Open R with super user privileges
+    ```bash
+    $ sudo R
+    ```
+
+3. Install the packages listed below
+    ```R
+    install.packages("caret")
+    install.packages("lfda")
+    install.packages("kernlab")
+    ```
