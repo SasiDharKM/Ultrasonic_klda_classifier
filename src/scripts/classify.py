@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 def main():
     t0 = time.time()
     is_A = True
-    data = np.loadtxt('../reduced_data/adi_36d_A')
+    data = np.loadtxt('../Flowmeters/Meter A')
     print data.shape
     N, m = data.shape
     m -= 1
@@ -22,9 +22,9 @@ def main():
     print X_test.shape, y_test.shape
 
     if not is_A:
-        clf = LogisticRegression(solver='sag', max_iter=10000, multi_class='multinomial', verbose=1, n_jobs=2)
+        clf = LogisticRegression(solver='sag', max_iter=20000, multi_class='multinomial', verbose=1, n_jobs=2, tol=1e-6)
     else:
-        clf = LogisticRegression(solver='saga', max_iter=10000, verbose=1, n_jobs=2)
+        clf = LogisticRegression(solver='saga', max_iter=20000, verbose=1, n_jobs=2, tol=1e-6)
     clf.fit(X_train, y_train)
     score = clf.score(X_test, y_test)
     scores = cross_val_score(clf, X_train, y_train, cv=5)
